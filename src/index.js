@@ -18,6 +18,8 @@ function search(event) {
   axios.get(apiUrl).then(displayTemperature);
 }
 
+searchCity("Paris");
+
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
@@ -43,6 +45,13 @@ function formatDate(date) {
 
   let formattedDay = days[day];
   return `${formattedDay} ${hours}:${minutes}`;
+}
+
+function refreshWeather(response) {
+  let temperatureElement = document.querySelector("temperature");
+  let temperature = response.data.temperature.current;
+
+  temperatureElement.innerHTML = Math.round(temperature);
 }
 
 let searchForm = document.querySelector("#search-form");
